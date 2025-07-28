@@ -1,0 +1,33 @@
+body {
+  font-family: sans-serif;
+  background: #fffbe6;
+  color: #333;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #cc0000;
+  margin-bottom: 1rem;
+}
+
+.deals {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  font-size: 1.5rem;
+}
+
+.deal {
+  background: #ffe8e8;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 5px #ccc;
+}
+
+footer {
+  margin-top: 2rem;
+  font-size: 0.8rem;
+  color: #666;
+}
