@@ -47,48 +47,46 @@
       <p class="text-lg text-pink-900">Your go-to place for flavour-packed ramen bowls, stacked burgers, and combos to keep you fueled.</p>
     </section>
 
-    <!-- Menu Cards -->
+    <!-- Static Menu Cards -->
     <section id="menu" class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-      
-      <article class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition-transform duration-300 cursor-pointer">
+      <article class="menu-card bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition-transform duration-300 cursor-pointer">
         <img
           src="./images/ramen-bowl.jpg"
           alt="Spicy Ramen Bowl"
           class="rounded-lg mb-4 object-cover h-48 w-full"
           loading="lazy"
         />
-        <h3 class="text-2xl font-semibold text-pink-700 mb-2">🍜 Spicy Ramen Bowl</h3>
+        <h3 class="item-name text-2xl font-semibold text-pink-700 mb-2">🍜 Spicy Ramen Bowl</h3>
         <p class="text-gray-700 mb-4">Rich miso broth, fire-roasted chili oil, soft egg, noodles that bite back.</p>
-        <div class="font-bold text-yellow-500 text-xl">R45</div>
+        <div class="item-price font-bold text-yellow-500 text-xl">45</div>
       </article>
 
-      <article class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition-transform duration-300 cursor-pointer">
+      <article class="menu-card bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition-transform duration-300 cursor-pointer">
         <img
           src="images/funky-burger.jpg"
           alt="Ultimate Funk Burger"
           class="rounded-lg mb-4 object-cover h-48 w-full"
           loading="lazy"
         />
-        <h3 class="text-2xl font-semibold text-pink-700 mb-2">🍔 Ultimate Funk Burger</h3>
+        <h3 class="item-name text-2xl font-semibold text-pink-700 mb-2">🍔 Ultimate Funk Burger</h3>
         <p class="text-gray-700 mb-4">Double smash patties, melted cheddar, zesty funk sauce, brioche bun.</p>
-        <div class="font-bold text-yellow-500 text-xl">R60</div>
+        <div class="item-price font-bold text-yellow-500 text-xl">60</div>
       </article>
 
-      <article class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition-transform duration-300 cursor-pointer">
+      <article class="menu-card bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition-transform duration-300 cursor-pointer">
         <img
           src="images/combo-meal.jpg"
           alt="Funky Meal Combo"
           class="rounded-lg mb-4 object-cover h-48 w-full"
           loading="lazy"
         />
-        <h3 class="text-2xl font-semibold text-pink-700 mb-2">🥤 Funky Meal Combo</h3>
+        <h3 class="item-name text-2xl font-semibold text-pink-700 mb-2">🥤 Funky Meal Combo</h3>
         <p class="text-gray-700 mb-4">Burger + chips + cool drink — because you're worth it.</p>
-        <div class="font-bold text-yellow-500 text-xl">R75</div>
+        <div class="item-price font-bold text-yellow-500 text-xl">75</div>
       </article>
-
     </section>
 
-    <!-- NEW: Dynamic Specials Section -->
+    <!-- Dynamic Specials Section -->
     <section id="dynamic-specials" class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mt-12">
       <!-- Dynamic content will be injected here -->
     </section>
@@ -125,6 +123,28 @@
     <p>© 2025 TapToBuy · Built with ❤️ by ENTRPRNRIX</p>
   </footer>
 
+  <!-- Modal for order quantity -->
+  <div id="order-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+    <div class="bg-white rounded-lg p-6 max-w-sm w-full relative">
+      <button id="modal-close" class="absolute top-3 right-3 text-gray-600 hover:text-gray-900 text-2xl font-bold">&times;</button>
+      <h2 id="modal-item-name" class="text-xl font-semibold mb-4 text-pink-700"></h2>
+      <label for="quantity" class="block mb-2 font-medium">Quantity:</label>
+      <input
+        id="quantity"
+        type="number"
+        min="1"
+        value="1"
+        class="border border-gray-300 rounded px-3 py-2 mb-4 w-full"
+      />
+      <button
+        id="confirm-order"
+        class="bg-pink-600 text-white px-6 py-3 rounded font-semibold w-full hover:bg-pink-700 transition"
+      >
+        Confirm Order
+      </button>
+    </div>
+  </div>
+
   <script>
     // Fade out intro screen after 3 seconds
     window.addEventListener('DOMContentLoaded', () => {
@@ -136,7 +156,54 @@
   </script>
 
   <script>
+    // Modal Elements
+    const modal = document.getElementById('order-modal');
+    const modalItemName = document.getElementById('modal-item-name');
+    const quantityInput = document.getElementById('quantity');
+    const confirmBtn = document.getElementById('confirm-order');
+    const modalCloseBtn = document.getElementById('modal-close');
+
+    // Open modal with item name and optional price
+    function openOrderModal(itemName, itemPrice = '') {
+      modalItemName.textContent = itemName + (itemPrice ? ` - R${itemPrice}` : '');
+      quantityInput.value = 1;
+      modal.classList.remove('hidden');
+      quantityInput.focus();
+    }
+
+    // Close modal function
+    function closeModal() {
+      modal.classList.add('hidden');
+    }
+
+    modalCloseBtn.addEventListener('click', closeModal);
+    // Close modal when clicking outside modal content
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    // Confirm button sends WhatsApp message with order
+    confirmBtn.addEventListener('click', () => {
+      const itemNameWithPrice = modalItemName.textContent;
+      const quantity = quantityInput.value;
+
+      if (!quantity || quantity < 1) {
+        alert('Please enter a valid quantity (1 or more).');
+        return;
+      }
+
+      const phoneNumber = '27826841966'; // Shop's WhatsApp number (country code + number)
+      const message = `Hi Funky Corner Shop! I'd like to order ${quantity} x ${itemNameWithPrice}. Please confirm.`;
+
+      const encodedMessage = encodeURIComponent(message);
+      const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+      window.open(whatsappUrl, '_blank');
+      closeModal();
+    });
+
     document.addEventListener('DOMContentLoaded', () => {
+      // Fetch and render dynamic specials
       const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR8T872UlHWrqBSAMr6vECFpjBeutEqrr_MWtlYqzun35hHTLP2qu4pVlg5gDKF2G2NhkSv8VgtX9I_/pub?gid=670823753&single=true&output=csv';
 
       fetch(csvUrl)
@@ -158,20 +225,38 @@
               const dealValue = item[dealKey];
               if (dealValue && dealValue.trim() !== '') {
                 const card = document.createElement('article');
-                card.className = 'bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition-transform duration-300 cursor-pointer';
+                card.className = 'dynamic-card bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition-transform duration-300 cursor-pointer';
+
+                // We show the dealValue as title and shop/location below
+                const shopName = item['Shop name or location ']?.trim() || 'our shop';
 
                 card.innerHTML = `
-                  <h3 class="text-2xl font-semibold text-pink-700 mb-2">${dealValue}</h3>
-                  <p class="text-gray-700 mb-4">Special from ${item['Shop name or location '] || 'our shop'}</p>
+                  <h3 class="item-name text-2xl font-semibold text-pink-700 mb-2">${dealValue}</h3>
+                  <p class="text-gray-700 mb-4">Special from ${shopName}</p>
                 `;
 
                 container.appendChild(card);
+
+                // Add click to open modal for dynamic cards (no price here)
+                card.addEventListener('click', () => {
+                  openOrderModal(dealValue);
+                });
               }
             });
           });
         })
         .catch(error => console.error('Error fetching or parsing CSV:', error));
+
+      // Add click handlers to static menu cards
+      document.querySelectorAll('.menu-card').forEach(card => {
+        card.addEventListener('click', () => {
+          const itemName = card.querySelector('.item-name')?.textContent.trim() || 'Item';
+          const itemPrice = card.querySelector('.item-price')?.textContent.trim() || '';
+          openOrderModal(itemName, itemPrice);
+        });
+      });
     });
   </script>
+
 </body>
 </html>
