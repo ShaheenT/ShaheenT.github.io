@@ -4,8 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>The Funky Corner Shop</title>
+  <!-- PapaParse for CSV parsing -->
+  <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
+
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+
   <!-- Font Awesome for social icons -->
   <link
     rel="stylesheet"
@@ -84,11 +88,16 @@
 
     </section>
 
+    <!-- NEW: Dynamic Specials Section -->
+    <section id="dynamic-specials" class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto mt-12">
+      <!-- Dynamic content will be injected here -->
+    </section>
+
     <!-- WhatsApp Order CTA -->
     <section id="order" class="mt-16 text-center">
       <h2 class="text-3xl font-bold mb-4 text-pink-700">Ready to Order?</h2>
       <a
-        href="https://wa.me/27712345678?text=Hi%20Funky%20Corner%20Shop!%20I%27d%20like%20to%20place%20an%20order%20for%20your%20Friday%20specials."
+        href="https://wa.me/27926841966?text=Hi%20Funky%20Corner%20Shop!%20I%27d%20like%20to%20place%20an%20order%20for%20your%20Friday%20specials."
         target="_blank"
         class="inline-flex items-center bg-green-500 text-white text-xl font-semibold px-8 py-4 rounded-full shadow-lg hover:bg-green-600 transition"
         aria-label="Order on WhatsApp"
@@ -126,5 +135,43 @@
     });
   </script>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const csvUrl = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vR8T872UlHWrqBSAMr6vECFpjBeutEqrr_MWtlYqzun35hHTLP2qu4pVlg5gDKF2G2NhkSv8VgtX9I_/pub?gid=670823753&single=true&output=csv';
+
+      fetch(csvUrl)
+        .then(response => response.text())
+        .then(csvText => {
+          const results = Papa.parse(csvText, { header: true });
+          const specials = results.data;
+
+          const container = document.getElementById('dynamic-specials');
+          container.innerHTML = ''; // Clear existing content
+
+          specials.forEach(item => {
+            // Loop through your 3 deal columns, create cards only if there is data
+            [
+              "Deal 1 – What’s your first special today?",
+              "Deal 2 – Any other combo or promotion?",
+              "Deal 3 – Another deal you’d like to show?"
+            ].forEach(dealKey => {
+              const dealValue = item[dealKey];
+              if (dealValue && dealValue.trim() !== '') {
+                const card = document.createElement('article');
+                card.className = 'bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition-transform duration-300 cursor-pointer';
+
+                card.innerHTML = `
+                  <h3 class="text-2xl font-semibold text-pink-700 mb-2">${dealValue}</h3>
+                  <p class="text-gray-700 mb-4">Special from ${item['Shop name or location '] || 'our shop'}</p>
+                `;
+
+                container.appendChild(card);
+              }
+            });
+          });
+        })
+        .catch(error => console.error('Error fetching or parsing CSV:', error));
+    });
+  </script>
 </body>
 </html>
