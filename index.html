@@ -1,39 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>🔥 The Funky Corner Shop 🔥</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>The Funky Corner Shop</title>
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome for social icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    integrity="sha512-pVnK7T6RO5daM+48H4NjHsmE6GHT5PyQa9b6ZKf0bS1fAlXpOd94d5f+EX7qz2H1iWpILP51wAPmE9Xsps/Jkg=="
+    crossorigin="anonymous"
+    referrerpolicy="no-referrer"
+  />
+  <!-- Custom styles -->
   <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <header>
-    <h1>🍜 The Funky Corner Shop 🍔</h1>
-    <p>Your Friday home of flavour-packed ramen bowls, stacked burgers, and good vibes.</p>
+<body class="bg-gradient-to-r from-yellow-50 via-pink-50 to-pink-100 font-comic overflow-x-hidden">
+
+  <!-- Animated Intro -->
+  <div id="intro" class="fixed inset-0 bg-pink-500 flex flex-col justify-center items-center text-white text-4xl font-bold tracking-wide z-50 animate-fadeOut delay-3000">
+    <div class="animate-bounce mb-4">🔥 Welcome to The Main Road Deli Shop 🔥</div>
+    <div class="text-xl font-normal">Friday Bowls & Burgers, Delicious Food!</div>
+  </div>
+
+  <header class="bg-pink-600 text-white p-6 shadow-md sticky top-0 z-40">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-3xl font-extrabold font-comic tracking-wider select-none">🍜 The Main Road Deli Shop 🍔</h1>
+      <nav class="space-x-6 text-lg">
+        <a href="#menu" class="hover:text-yellow-300 transition">Menu</a>
+        <a href="#order" class="hover:text-yellow-300 transition">Order</a>
+        <a href="#contact" class="hover:text-yellow-300 transition">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <section class="menu">
-    <h2>🔥 Today’s Funky Specials</h2>
-    <div class="card">
-      <h3>🍜 Spicy Ramen Bowl</h3>
-      <p>Rich miso broth, fire-roasted chili oil, soft egg, noodles that bite back.</p>
-      <span>R45</span>
-    </div>
-    <div class="card">
-      <h3>🍔 Ultimate Funk Burger</h3>
-      <p>Double smash patties, melted cheddar, zesty funk sauce, brioche bun.</p>
-      <span>R60</span>
-    </div>
-    <div class="card">
-      <h3>🥤 Funky Meal Combo</h3>
-      <p>Burger + chips + cool drink — because you're worth it.</p>
-      <span>R75</span>
-    </div>
-  </section>
+  <main class="container mx-auto px-4 mt-10 fade-in">
+    <!-- Intro Text -->
+    <section class="text-center mb-12 max-w-xl mx-auto">
+      <h2 class="text-4xl font-bold mb-4 text-pink-700">Friday Specials</h2>
+      <p class="text-lg text-pink-900">Your go-to place for flavour-packed ramen bowls, stacked burgers, and combos to keep you fueled.</p>
+    </section>
 
-  <footer>
-    <p>📍 Visit us on Funky Fridays | 💬 WhatsApp orders: 071-234-5678</p>
-    <p>🚀 Powered by TapToBuy · Built with ❤️ by ENTRPRNRIX</p>
+    <!-- Menu Cards -->
+    <section id="menu" class="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+      
+      <article class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition-transform duration-300 cursor-pointer">
+        <img
+          src="./images/ramen-bowl.jpg"
+          alt="Spicy Ramen Bowl"
+          class="rounded-lg mb-4 object-cover h-48 w-full"
+          loading="lazy"
+        />
+        <h3 class="text-2xl font-semibold text-pink-700 mb-2">🍜 Spicy Ramen Bowl</h3>
+        <p class="text-gray-700 mb-4">Rich miso broth, fire-roasted chili oil, soft egg, noodles that bite back.</p>
+        <div class="font-bold text-yellow-500 text-xl">R45</div>
+      </article>
+
+      <article class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition-transform duration-300 cursor-pointer">
+        <img
+          src="images/funky-burger.jpg"
+          alt="Ultimate Funk Burger"
+          class="rounded-lg mb-4 object-cover h-48 w-full"
+          loading="lazy"
+        />
+        <h3 class="text-2xl font-semibold text-pink-700 mb-2">🍔 Ultimate Funk Burger</h3>
+        <p class="text-gray-700 mb-4">Double smash patties, melted cheddar, zesty funk sauce, brioche bun.</p>
+        <div class="font-bold text-yellow-500 text-xl">R60</div>
+      </article>
+
+      <article class="bg-white rounded-xl shadow-lg p-6 transform hover:scale-105 transition-transform duration-300 cursor-pointer">
+        <img
+          src="images/combo-meal.jpg"
+          alt="Funky Meal Combo"
+          class="rounded-lg mb-4 object-cover h-48 w-full"
+          loading="lazy"
+        />
+        <h3 class="text-2xl font-semibold text-pink-700 mb-2">🥤 Funky Meal Combo</h3>
+        <p class="text-gray-700 mb-4">Burger + chips + cool drink — because you're worth it.</p>
+        <div class="font-bold text-yellow-500 text-xl">R75</div>
+      </article>
+
+    </section>
+
+    <!-- WhatsApp Order CTA -->
+    <section id="order" class="mt-16 text-center">
+      <h2 class="text-3xl font-bold mb-4 text-pink-700">Ready to Order?</h2>
+      <a
+        href="https://wa.me/27712345678?text=Hi%20Funky%20Corner%20Shop!%20I%27d%20like%20to%20place%20an%20order%20for%20your%20Friday%20specials."
+        target="_blank"
+        class="inline-flex items-center bg-green-500 text-white text-xl font-semibold px-8 py-4 rounded-full shadow-lg hover:bg-green-600 transition"
+        aria-label="Order on WhatsApp"
+      >
+        <i class="fab fa-whatsapp mr-3 text-3xl"></i> Order via WhatsApp
+      </a>
+    </section>
+
+    <!-- Contact & Social -->
+    <section id="contact" class="mt-20 text-center text-gray-800">
+      <h2 class="text-3xl font-bold mb-4 text-pink-700">Stay Connected</h2>
+      <p class="mb-4">📍 Visit us every Friday for great food & vibes!</p>
+      <div class="flex justify-center space-x-6 text-3xl text-pink-600">
+        <a href="https://instagram.com/yourshop" target="_blank" aria-label="Instagram" class="hover:text-yellow-400 transition">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://facebook.com/yourshop" target="_blank" aria-label="Facebook" class="hover:text-yellow-400 transition">
+          <i class="fab fa-facebook-square"></i>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="bg-pink-600 text-white text-center p-6 mt-20 select-none">
+    <p>© 2025 TapToBuy · Built with ❤️ by ENTRPRNRIX</p>
   </footer>
+
+  <script>
+    // Fade out intro screen after 3 seconds
+    window.addEventListener('DOMContentLoaded', () => {
+      setTimeout(() => {
+        const intro = document.getElementById('intro');
+        if (intro) intro.style.display = 'none';
+      }, 3000);
+    });
+  </script>
+
 </body>
 </html>

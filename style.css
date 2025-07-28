@@ -1,74 +1,38 @@
-body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-  background: linear-gradient(135deg, #fff6e6, #ffe2e2);
-  color: #2c2c2c;
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&display=swap');
+
+.font-comic {
+  font-family: 'Comic Neue', cursive, sans-serif;
 }
 
-header {
+/* Intro animation */
+@keyframes fadeOutIntro {
+  0% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+.animate-fadeOut {
+  animation: fadeOutIntro 3s forwards;
+}
+
+/* Fade-in main content */
+.fade-in {
+  animation: fadeInContent 1.2s ease forwards;
+  opacity: 0;
+}
+
+@keyframes fadeInContent {
+  to { opacity: 1; }
+}
+
+/* Override default scrollbar for funky style */
+body::-webkit-scrollbar {
+  width: 8px;
+}
+body::-webkit-scrollbar-track {
+  background: #ffe2e2;
+}
+body::-webkit-scrollbar-thumb {
   background-color: #ff5c5c;
-  color: #fff;
-  padding: 2rem 1rem;
-  border-bottom: 4px dashed #fff;
-}
-
-header h1 {
-  margin: 0;
-  font-size: 2.5rem;
-}
-
-.menu {
-  padding: 2rem;
-}
-
-.menu h2 {
-  color: #e63946;
-  font-size: 1.8rem;
-  margin-bottom: 2rem;
-}
-
-.card {
-  background: #ffffff;
-  margin: 1rem auto;
-  padding: 1.5rem;
-  border: 2px solid #ffb703;
-  border-radius: 12px;
-  max-width: 400px;
-  box-shadow: 0 0 10px rgba(255, 92, 92, 0.2);
-  transition: transform 0.2s ease;
-}
-
-.card:hover {
-  transform: scale(1.03);
-}
-
-.card h3 {
-  margin-top: 0;
-  font-size: 1.5rem;
-  color: #219ebc;
-}
-
-.card p {
-  font-size: 1rem;
-  margin: 0.5rem 0;
-}
-
-.card span {
-  display: inline-block;
-  margin-top: 0.5rem;
-  font-weight: bold;
-  background: #ffb703;
-  color: #fff;
-  padding: 0.5rem 1rem;
-  border-radius: 50px;
-}
-
-footer {
-  background-color: #023047;
-  color: #fff;
-  padding: 1.5rem 1rem;
-  margin-top: 3rem;
-  font-size: 0.9rem;
+  border-radius: 10px;
 }
