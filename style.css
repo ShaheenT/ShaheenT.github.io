@@ -1,33 +1,74 @@
 body {
-  font-family: sans-serif;
-  background: #fffbe6;
-  color: #333;
-  padding: 20px;
+  margin: 0;
+  padding: 0;
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  background: linear-gradient(135deg, #fff6e6, #ffe2e2);
+  color: #2c2c2c;
   text-align: center;
 }
 
-h1 {
-  font-size: 2rem;
-  color: #cc0000;
-  margin-bottom: 1rem;
+header {
+  background-color: #ff5c5c;
+  color: #fff;
+  padding: 2rem 1rem;
+  border-bottom: 4px dashed #fff;
 }
 
-.deals {
-  display: flex;
-  flex-direction: column;
-  gap: 1.2rem;
+header h1 {
+  margin: 0;
+  font-size: 2.5rem;
+}
+
+.menu {
+  padding: 2rem;
+}
+
+.menu h2 {
+  color: #e63946;
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+}
+
+.card {
+  background: #ffffff;
+  margin: 1rem auto;
+  padding: 1.5rem;
+  border: 2px solid #ffb703;
+  border-radius: 12px;
+  max-width: 400px;
+  box-shadow: 0 0 10px rgba(255, 92, 92, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: scale(1.03);
+}
+
+.card h3 {
+  margin-top: 0;
   font-size: 1.5rem;
+  color: #219ebc;
 }
 
-.deal {
-  background: #ffe8e8;
-  padding: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 0 5px #ccc;
+.card p {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+}
+
+.card span {
+  display: inline-block;
+  margin-top: 0.5rem;
+  font-weight: bold;
+  background: #ffb703;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
 }
 
 footer {
-  margin-top: 2rem;
-  font-size: 0.8rem;
-  color: #666;
+  background-color: #023047;
+  color: #fff;
+  padding: 1.5rem 1rem;
+  margin-top: 3rem;
+  font-size: 0.9rem;
 }
